@@ -9,6 +9,6 @@ RUN tar -zcvf  /azure-cli.tar.gz /data
 FROM vault
 RUN apk add jq rclone curl python3 ca-certificates
 COPY --from=builder /azure-cli.tar.gz /data/azure-cli.tar.gz
-RUN tar -zxvf /data/azure-cli.tar.gz
+RUN tar -zxvf /data/azure-cli.tar.gz && rm -rf /data/azure-cli.tar.gz
 RUN curl -L "https://dl.k8s.io/release/${KUBEVERSION}/bin/linux/amd64/kubectl" -o /usr/bin/kubectl
 RUN chmod +x /usr/bin/kubectl
